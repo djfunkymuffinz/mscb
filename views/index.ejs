@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>MSCB Site</title>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+   <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+   <style>
+      .mdl-layout__header-row {
+         height: auto;
+      }
+      .header-info {
+         text-align: right;
+      }
+   </style>
+</head>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+   <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+         <span class="mdl-layout-title">Mid Shore</br>Community Band</span>
+         <div class="mdl-layout-spacer"></div>
+         <div class="header-info">Serving the</br>
+            Middle Eastern Shore of Maryland</br></br>
+            EJ Oesterle - Music Director</br>
+            Matt Fullerton - Music Director Emeritus</br>
+         </div>
+      </div>
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+         <% for (const tab of tabs) { %>
+            <% if (renderTab(tab)) { %>
+               <a href="#<%= tab.id %>" class="mdl-layout__tab<%= tab.isDefault ? ' is-active' : '' %>"><%= tab.title %></a>
+            <% }%>
+         <% } %>
+      </div>
+   </header>
+   <main class="mdl-layout__content">
+      <% for (const tab of tabs) { %>
+         <section class="mdl-layout__tab-panel<%= tab.isDefault ? ' is-active' : '' %>" id="<%= tab.id %>">
+            <% include(tab.template) %>
+         </section>
+      <% } %>
+   </main>
+</div>
+</html>
