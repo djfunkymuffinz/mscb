@@ -45,6 +45,7 @@ const tabs = [{
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
+app.use('/assets', express.static('./assets'));
 
 app.get('/', function(req,res) {
    //req.isLoggedIn = true;
