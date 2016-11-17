@@ -22,6 +22,7 @@ body::before {
 
 .home-card {
    width: 75%;
+   max-width: 1024px;
    min-height: 500px;
    margin: 16px auto;
 }
@@ -62,32 +63,50 @@ body::before {
    background-image: url('/assets/img/md-facebook.png');
 }
 
+.performance-locations {
+   width: 80%;
+   min-height: 500px;
+   margin: 16px auto;
+}
+
+.performance-locations > .mdl-card {
+   width: 448px;
+}
+
 .dcfa-card > .mdl-card__title {
    color: #fff;
-   min-height: 200px;
+   min-height: 300px;
    background: url('/assets/img/dcfa.jpg') center / cover;
 }
 
 .ece-card > .mdl-card__title {
    color: #fff;
-   min-height: 200px;
+   min-height: 300px;
    background: url('/assets/img/ece.jpg') center / cover;
 }
 
 .wf-card > .mdl-card__title {
    color: #fff;
-   min-height: 200px;
+   min-height: 300px;
    background: url('/assets/img/wf.jpg') center / cover;
 }
 
 .nchs-card > .mdl-card__title {
    color: #fff;
-   min-height: 200px;
+   min-height: 300px;
    background: url('/assets/img/nchs.jpg') center / cover;
 }
 
 .mumc-card > .mdl-card__title {
    color: #fff;
-   min-height: 200px;
-   background: url('/assets/img/christmas.jpg');
+   min-height: 300px;
+   background: url('/assets/img/christmas.jpg') center / cover;
+}
+
+.cism-card > .mdl-card__title {
+   color: #fff;
+   min-height: 300px;
+   background: url('/assets/img/cism.jpg'); 
+   background-position: center center / cover;
+   background-repeat: no-repeat;
 }
