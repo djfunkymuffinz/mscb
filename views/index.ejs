@@ -3,61 +3,31 @@
 <head>
    <meta charset="UTF-8">
    <title>MSCB Site</title>
+   <base href="/">
    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
-   <style>
-      .mdl-layout__header-row {
-         height: auto;
-      }
-      .header-info {
-         text-align: right;
-      }
-      body::before {
-         background-size: cover;
-         background-attachment: fixed;
-         background-image: url('assets/img/background.jpg');
-         content: '';
-         will-change: transform;
-         z-index: -1;
-         left: 0;
-         right: 0;
-         bottom: 0;
-         top: 0;
-         position:fixed
-      }
-      .home-card {
-         max-width: 900px;
-         padding: 0;
-         display: flex;
-         width: 100%;
-         margin: 0 auto;
-         flex-shrink: 0;
-      }
-      .mdl-card {
-         display: flex;
-         flex-direction: column;
-         align-items: stretch;
-         min-height: 360px;
-      }
-   </style>
+   <link rel="stylesheet" href="assets/styles.css"></link>
 </head>
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-tabs">
-   <header class="mdl-layout__header">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+   <header class="mscb-header mdl-layout__header mdl-layout__header--scroll">
       <div class="mdl-layout__header-row">
-         <span class="mdl-layout-title">Mid Shore</br>Community Band</span>
+         <span class="mdl-layout-title">Mid Shore<br>Community Band</span>
          <div class="mdl-layout-spacer"></div>
-         <div class="header-info">Serving the</br>
-            Middle Eastern Shore of Maryland</br></br>
-            EJ Oesterle - Music Director</br>
-            Matt Fullerton - Music Director Emeritus</br>
+         <div class="header-info">Serving the<br>
+            Middle Eastern Shore of Maryland<br><br>
+            EJ Oesterle - Music Director<br>
+            Matt Fullerton - Music Director Emeritus<br>
          </div>
       </div>
       <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
          <% for (const tab of tabs) { %>
             <% if (renderTab(tab)) { %>
-               <a href="#<%= tab.id %>" class="mdl-layout__tab<%= tab.isDefault ? ' is-active' : '' %>"><%= tab.title %></a>
+               <a href="#<%= tab.id %>" id="<%=tab.id%>" class="mdl-layout__tab<%= tab.isDefault ? ' is-active' : '' %>"><%= tab.title %></a>
+               <div class="mdl-tooltip mdl-tooltip--large" for="<%=tab.id%>">
+                  <%=tab.tooltip%>
+               </div>
             <% }%>
          <% } %>
       </div>

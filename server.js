@@ -4,27 +4,33 @@ const tabs = [{
    title: 'Home',
    template: 'home.ejs',
    id: 'home',
-   isDefault: true,
+   tooltip: 'Homepage for MSCB',
+   isDefault: true
 }, {
    title: 'Performances',
    template: 'performances.ejs',
    id: 'performances',
+   tooltip: 'Upcoming MSCB performances'
 }, {
    title: 'Join',
    template: 'join.ejs',
    id: 'join',
+   tooltip: 'Would you like to become a musician in the band?'
 }, {
    title: 'Donate',
    template: 'donate.ejs',
    id: 'donate',
+   tooltip: 'Support MSCB with your donations'
 }, {
    title: 'Photos',
    template: 'photos.ejs',
    id: 'photos',
+   tooltip: 'Photos from recent concerts'
 }, {
    title: 'Members',
    template: 'members.ejs',
    id: 'members',
+   tooltip: 'Section for band members only - password required',
    doRender: 'anon'
 }, {
    title: 'Listening',

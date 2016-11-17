@@ -1,0 +1,93 @@
+.mdl-layout__header-row {
+   height: auto;
+}
+
+.header-info {
+   text-align: right;
+}
+
+body::before {
+   background-size: cover;
+   background-attachment: fixed;
+   background-image: url('/assets/img/background.jpg');
+   content: '';
+   will-change: transform;
+   z-index: -1;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   top: 0;
+   position:fixed;
+}
+
+.home-card {
+   width: 75%;
+   min-height: 500px;
+   margin: 16px auto;
+}
+
+.home-card > div {
+   padding: 32px;
+}
+
+.flag-day {
+   display: block;
+   width: 75%;
+   margin: auto;
+   margin-bottom: 32px;
+}
+
+.mscb-header.mdl-layout__header.is-compact {
+   max-height: 100px;
+}
+
+.text-center {
+   text-align: center;
+}
+
+.social-btn {
+   background-position: center;
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-color: transparent;
+   margin: 0 16px;
+   width: 48px;
+   height: 48px;
+   cursor: pointer;
+   opacity: 0.46;
+   border: none
+}
+
+.social-btn--facebook {
+   background-image: url('/assets/img/md-facebook.png');
+}
+
+.dcfa-card > .mdl-card__title {
+   color: #fff;
+   min-height: 200px;
+   background: url('/assets/img/dcfa.jpg') center / cover;
+}
+
+.ece-card > .mdl-card__title {
+   color: #fff;
+   min-height: 200px;
+   background: url('/assets/img/ece.jpg') center / cover;
+}
+
+.wf-card > .mdl-card__title {
+   color: #fff;
+   min-height: 200px;
+   background: url('/assets/img/wf.jpg') center / cover;
+}
+
+.nchs-card > .mdl-card__title {
+   color: #fff;
+   min-height: 200px;
+   background: url('/assets/img/nchs.jpg') center / cover;
+}
+
+.mumc-card > .mdl-card__title {
+   color: #fff;
+   min-height: 200px;
+   background: url('/assets/img/christmas.jpg');
+}
