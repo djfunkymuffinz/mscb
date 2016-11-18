@@ -11,7 +11,6 @@ body::before {
    background-attachment: fixed;
    background-image: url('/assets/img/background.jpg');
    content: '';
-   will-change: transform;
    z-index: -1;
    left: 0;
    right: 0;
@@ -33,9 +32,10 @@ body::before {
 
 .flag-day {
    display: block;
-   width: 75%;
    margin: auto;
    margin-bottom: 32px;
+   height: 320px;
+   background: url('/assets/img/flag_day_2016.jpg') center / cover;
 }
 
 .mscb-header.mdl-layout__header.is-compact {
@@ -64,49 +64,39 @@ body::before {
 }
 
 .performance-locations {
-   width: 80%;
-   min-height: 500px;
-   margin: 16px auto;
+   max-width: 1280px;
+   margin: auto;
 }
 
-.performance-locations > .mdl-card {
-   width: 448px;
+.performance-locations .mdl-card__title {
+   color: #fff;
+   min-height: 300px;
 }
 
 .dcfa-card > .mdl-card__title {
-   color: #fff;
-   min-height: 300px;
    background: url('/assets/img/dcfa.jpg') center / cover;
 }
 
 .ece-card > .mdl-card__title {
-   color: #fff;
-   min-height: 300px;
    background: url('/assets/img/ece.jpg') center / cover;
 }
 
 .wf-card > .mdl-card__title {
-   color: #fff;
-   min-height: 300px;
    background: url('/assets/img/wf.jpg') center / cover;
 }
 
 .nchs-card > .mdl-card__title {
-   color: #fff;
-   min-height: 300px;
    background: url('/assets/img/nchs.jpg') center / cover;
 }
 
 .mumc-card > .mdl-card__title {
-   color: #fff;
-   min-height: 300px;
    background: url('/assets/img/christmas.jpg') center / cover;
 }
 
 .cism-card > .mdl-card__title {
-   color: #fff;
-   min-height: 300px;
-   background: url('/assets/img/cism.jpg'); 
-   background-position: center center / cover;
-   background-repeat: no-repeat;
+   background: url('/assets/img/cism.jpg') center / cover; 
+}
+
+footer {
+   flex: none;
 }
