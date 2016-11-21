@@ -1,5 +1,42 @@
 const express = require('express');
 const app = express();
+const performances = [{
+   title: 'Dorchester Arts Showcase',
+   id: 'dcfa-card',
+   info: 'Sunday, September 25, 2016\n2:00 PM In front of the Courthouse, Cambridge, MD'
+}, {
+   title: 'Easton Club East',
+   id: 'ece-card',
+   info: 'Sunday, October 16, 2016\n4:00 PM Easton, MD'
+}, {
+   title: 'Easton Waterfowl Festival',
+   id: 'wf-card',
+   info: 'Saturday, November 12, 2016\n2:00 PM Thompson Park, Easton, MD'
+}, {
+   title: 'Christmas Concert',
+   id: 'nchs-card',
+   info: 'Tuesday, 29 November\n7:00 PM North Caroline High School Auditorium'
+}, {
+   title: 'Christmas Concert',
+   id: 'mumc-card',
+   info: 'Sunday December 4, 2016\n6:30 PM St. Marks United Methodist Church, Easton, MD'
+}, {
+   title: 'Christmas in St. Michaels',
+   id: 'cism-card',
+   info: 'Saturday December 10, 2016\n10:00 AM At the Reviewing Stand, Railroad Ave, St. Michaels, MD'
+}, {
+   title: 'Saint Patrick\'s Concert',
+   id: 'spd-card',
+   info: 'Sunday March 5, 2017\n4:00 PM Christ Church, Cambridge, MD'
+}, {
+   title: 'Maryland Community Band Festival',
+   id: 'mcbf-card',
+   info: 'Saturday June 10, 2017\n1:00 PM Historic Springfield Barn, Williamsport, MD'
+}, {
+   title: 'Flag Day Concert and Flag Day Ceremony',
+   id: 'fd-card',
+   info: 'Wednesday June 14, 2017\nEaston Elks Lodge, Easton, MD'
+}]
 const tabs = [{
    title: 'Home',
    template: 'home.ejs',
@@ -60,6 +97,7 @@ app.get('/', function(req,res) {
    };
 
    res.render('index', {
+      performances,
       tabs,
       renderTab: (tab) => {
          if (!tab.doRender) return true;

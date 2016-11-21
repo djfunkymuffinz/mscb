@@ -6,6 +6,10 @@
    text-align: right;
 }
 
+p {
+   font-family: 'Roboto';
+}
+
 body::before {
    background-size: cover;
    background-attachment: fixed;
@@ -19,23 +23,24 @@ body::before {
    position:fixed;
 }
 
-.home-card {
+.main-card {
    width: 75%;
    max-width: 1024px;
    min-height: 500px;
    margin: 16px auto;
 }
 
-.home-card > div {
+.main-card > div {
    padding: 32px;
 }
 
-.flag-day {
+.home-image {
    display: block;
    margin: auto;
    margin-bottom: 32px;
    height: 320px;
-   background: url('/assets/img/flag_day_2016.jpg') center / cover;
+   background: url('/assets/img/home_image.jpg') center;
+   background-repeat: no-repeat;
 }
 
 .mscb-header.mdl-layout__header.is-compact {
@@ -95,6 +100,22 @@ body::before {
 
 .cism-card > .mdl-card__title {
    background: url('/assets/img/cism.jpg') center / cover; 
+}
+
+.spd-card > .mdl-card__title {
+   background: url('/assets/img/spd.jpg') center / cover;
+}
+
+.mcbf-card > .mdl-card__title {
+   background: url('/assets/img/mcbf.jpg') center / cover;
+}
+
+.fd-card > .mdl-card__title {
+   background: url('/assets/img/fd.jpg') center / cover;
+}
+
+.instrument-list {
+   padding: 0px 100px;
 }
 
 footer {

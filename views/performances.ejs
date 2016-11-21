@@ -1,52 +1,15 @@
 <div class="page-content">
    <div class="performance-locations mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp dcfa-card">
-         <div class="mdl-card__title"></div>
-         <div class="mdl-card__supporting-text">
-            <h5>Dorchester Arts Showcase</h5>
-            Sunday, September 25, 2016<br>
-            2:00 PM In front of the Courthouse, Cambridge, MD
+
+      <% for (const performance of performances) { %>
+         <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp <%= performance.id %>">
+            <div class="mdl-card__title"></div>
+            <div class="mdl-card__supporting-text">
+               <h5><%= performance.title %></h5>
+               <%= performance.info %>
+            </div>
          </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp ece-card">
-         <div class="mdl-card__title"></div>
-         <div class="mdl-card__supporting-text">
-            <h5>Easton Club East</h5>
-            Sunday, October 16, 2016<br>
-            4:00 PM Easton, MD
-         </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp wf-card">
-         <div class="mdl-card__title"></div>
-         <div class="mdl-card__supporting-text">
-            <h5>Easton Waterfowl Festival</h5>
-            Saturday, November 12, 2016<br>
-            2:00 PM Thompson Park, Easton, MD
-         </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp nchs-card">
-         <div class="mdl-card__title"></div>
-         <div class="mdl-card__supporting-text">
-            <h5>Christmas Concert</h5>
-            Tuesday, 29 November<br>
-            7:00 PM North Caroline High School Auditorium
-         </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp mumc-card">
-         <div class="mdl-card__title"></div>
-         <div class="mdl-card__supporting-text">
-            <h5>Christmas Concert</h5>
-            Sunday December 4, 2016<br>
-            6:30 PM St. Marks United Methodist Church - Easton, MD
-         </div>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp cism-card">
-         <div class="mdl-card__title"></div>
-         <div class="mdl-card__supporting-text">
-            <h5>Christmas in St. Michaels</h5>
-            Saturday December 10, 2016<br>
-            10:00 AM At the Reviewing Stand, Railroad Ave, St. Michaels, MD
-         </div>
-      </div>
+      <% } %>
+
    </div>
 </div>

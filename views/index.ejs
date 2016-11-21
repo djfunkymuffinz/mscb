@@ -5,7 +5,7 @@
    <title>MSCB Site</title>
    <base href="/">
    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-   <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+   <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-amber.min.css" />
    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
    <link rel="stylesheet" href="assets/styles.css"></link>
 </head>
@@ -26,7 +26,7 @@
             <% if (renderTab(tab)) { %>
                <a href="#<%= tab.id %>" id="<%=tab.id%>" class="mdl-layout__tab<%= tab.isDefault ? ' is-active' : '' %>"><%= tab.title %></a>
                <div class="mdl-tooltip mdl-tooltip--large" for="<%=tab.id%>">
-                  <%=tab.tooltip%>
+                  <%= tab.tooltip %>
                </div>
             <% }%>
          <% } %>
@@ -48,6 +48,7 @@
          <ul class="mdl-mini-footer__link-list">
             <li><a href="#">About Us</a></li>
             <li><a href="mailto:info@mscb.org">Contact MSCB</a></li>
+            <li><a href="https://icons8.com">Icons</a></li>
          </ul>
       </div>
 
