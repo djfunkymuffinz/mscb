@@ -1,0 +1,30 @@
+{
+  "name": "mscb-test",
+  "authors": [
+    "Alexander Honer <djfunkymuffins@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.7.0",
+    "paper-scroll-header-panel": "PolymerElements/paper-scroll-header-panel#^1.0.0",
+    "paper-header-panel": "PolymerElements/paper-header-panel#^1.1.7",
+    "paper-tabs": "PolymerElements/paper-tabs#^1.7.0",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "iron-pages": "PolymerElements/iron-pages#^1.0.8",
+    "paper-card": "PolymerElements/paper-card#^1.1.4",
+    "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.3",
+    "paper-button": "PolymerElements/paper-button#^1.0.14",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.1.0"
+  }
+}

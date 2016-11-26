@@ -1,0 +1,152 @@
+<link rel="import" href="mscb-home.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="mscb-app">
+   <style>
+      html {
+         height: 100%;
+      }
+   
+      html * {
+         font-family 'Roboto';
+      }
+   
+      body {
+         height: 100%;
+         margin: auto;
+      }
+   
+      .has-background {
+         background-image: url('../assets/img/background.jpg');
+      }
+   
+      paper-tabs {
+         width: 100%;
+         font-family: 'Roboto';
+      }
+   
+      .bottom {
+         width: 100%;
+      }
+   
+      mscb-home {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+      }
+   
+      .members {
+         height: 300px;
+         display: flex;
+         flex-direction: row;
+         justify-content: space-around;
+         align-items: center;
+      }
+   
+      .member-button {
+         background-color: khaki;
+      }
+   </style>
+
+   <template>
+      <paper-header-panel mode="scroll">
+         <paper-toolbar class="medium-tall">
+            <span class="title">MSCB</span>
+            <div class="bottom">
+               <paper-tabs selected="{{page}}">
+                  <template is="dom-repeat" items="{{tabs}}" filter="isMember">
+                     <paper-tab class="{{item.id}}">{{item.title}}</paper-tab>
+                  </template>
+               </paper-tabs>
+            </div>
+         </paper-toolbar>
+         
+         <iron-pages selected="{{page}}">
+            <mscb-home class="has-background"></mscb-home>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="members">
+               <paper-button class="member-button" raised on-click="logInAttempt">Log In</paper-button>
+            </div>
+         </iron-pages>
+      </paper-header-panel>
+   </template>
+
+   <script>
+      Polymer({
+
+         is: 'mscb-app',
+
+         properties: {
+            isLoggedIn: {
+               type: Boolean,
+               value: false,
+               observer: '_loggedInChanged'
+            },
+            page: {
+               type: Number,
+               value: 0
+            },
+            tabs: {
+               type: Array,
+               value: [{
+                     title: 'Home',
+                     id: 'home'
+                  }, {
+                     title: 'Performances',
+                     id: 'performances'
+                  }, {
+                     title: 'Join',
+                     id: 'join'
+                  }, {
+                     title: 'Donate',
+                     doRender: 'public',
+                     id: 'donate'
+                  }, {
+                     title: 'Photos',
+                     id: 'photos'
+                  }, {
+                     title: 'Members',
+                     doRender: 'anon',
+                     id: 'members'
+                  }, {
+                     title: 'Listening',
+                     doRender: 'member',
+                     id: 'listening'
+                  }, {
+                     title: 'Database',
+                     doRender: 'member',
+                     id: 'database'
+                  }, {
+                     title: 'Documents',
+                     doRender: 'member',
+                     id: 'documents'
+                  }],
+            }
+         },
+
+         logInAttempt: function() {
+            console.log(this.isLoggedIn);
+            this.isLoggedIn = true;
+            console.log(this.isLoggedIn);
+         },
+
+         isMember: function(item) {
+            if (!item.doRender) return true;
+            return this.isLoggedIn ? item.doRender === 'member' : item.doRender === 'anon';
+         },
+
+         _loggedInChanged: function() {
+            var tabs = document.querySelector('template[is="dom-repeat"]');
+            tabs.render();
+         }
+      });
+
+   </script>
+</dom-module>
