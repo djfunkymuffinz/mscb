@@ -14,43 +14,8 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <dom-module id="mscb-app">
 <style>
-   html {
+   neon-animated-pages {
       height: 100%;
-   }
-
-   html * {
-      font-family 'Roboto';
-   }
-
-   body {
-      height: 100%;
-      margin: auto;
-   }
-
-   .has-background {
-      background-image: url('../assets/img/background.jpg');
-   }
-
-   mscb-home {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-   }
-
-   mscb-perform {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-   }
-
-   paper-tabs {
-      transition: opacity .4s cubic-bezier(.4,0,.2,1);
-      width: 100%;
-      position: absolute;
-      bottom: 0px;
-      background-color: transparent;
-      --paper-tabs-selection-bar-color: var(--accent-color);
-      color: currentColor;
    }
 
    .tabs-container {
@@ -62,10 +27,18 @@
       color: white;
    }
 
+   paper-tabs {
+      transition: opacity .4s cubic-bezier(.4,0,.2,1);
+      width: 100%;
+      position: absolute;
+      bottom: 0px;
+      background-color: transparent;
+      color: currentColor;
+      --paper-tabs-selection-bar-color: var(--accent-color);
+   }
 
    .tabs-container.login-prompt {
       height: 96px;
-      
    }
 
    .tabs-container.login-prompt paper-tabs {
@@ -128,27 +101,30 @@
             <paper-tab>Join</paper-tab>
             <paper-tab>Donate</paper-tab>
             <paper-tab>Photos</paper-tab>
-            <paper-tab on-tap="checkLogIn">Listening</paper-tab>
-            <paper-tab on-tap="checkLogIn">Database</paper-tab>
-            <paper-tab on-tap="checkLogIn">Documents</paper-tab>
+            <paper-tab on-tap="checkLogin">Listening</paper-tab>
+            <paper-tab on-tap="checkLogin">Database</paper-tab>
+            <paper-tab on-tap="checkLogin">Documents</paper-tab>
          </paper-tabs>
          <div class="login-form-container">
             <form>
                <paper-card>
                   <paper-input
                      label="password"
-                     type="password"></paper-input>
+                     type="password">
+                  </paper-input>
                   <paper-button
                      type="submit"
-                     raised>Login</paper-button>
+                     raised>
+                     Login
+                  </paper-button>
                </paper-card>
             </form>
          </div>
       </div>
       
       <neon-animated-pages selected="[[page]]">
-         <mscb-home class="has-background"></mscb-home>
-         <mscb-perform class="has-background"></mscb-perform>
+         <mscb-home></mscb-home>
+         <mscb-perform></mscb-perform>
          <div></div>
          <div></div>
          <div></div>
@@ -186,7 +162,7 @@ Polymer({
       console.log(this.isLoggedIn);
    },
 
-   checkLogIn: function(event) {
+   checkLogin: function(event) {
       if(this.isLoggedIn) return;
       event.stopPropagation();
       this.loginClass = 'login-prompt';

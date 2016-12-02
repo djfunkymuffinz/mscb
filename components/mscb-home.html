@@ -2,54 +2,56 @@
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="animations/page-entry-animation.html">
 <dom-module id="mscb-home">
-   <style>
-      paper-card {
-         max-width: 750px;
-         margin-top: 10px;
-         margin-bottom: 10px;
-      }
+<style>
+   :host > div {
+      min-height: 100%;
+      background-image: url('../assets/img/background.jpg');
+      padding: 8px;
+   }
 
-      p {
-         padding: 32px;
-         font-family: 'Roboto';
-      }
+   paper-card {
+      display: block;
+      max-width: 750px;
+      margin: auto;
+   }
 
-      .home-img {
-         display: block;
-         margin-bottom: 32px;
-         height: 320px;
-         background: url('../assets/img/home-image.jpg') center / cover;
-         background-repeat: no-repeat;
-      }
+   paper-card .header {
+      height: 320px;
+      background: url('../assets/img/home-image.jpg') center / cover;
+      background-repeat: no-repeat;
+   }
 
-      .centered-text {
-         text-align: center;
-      }
-   </style>
+   .centered-text {
+      text-align: center;
+   }
+</style>
 
-   <template>
+<template>
+   <div>
       <paper-card>
-         <div class="home-img"></div>
-         <p>
-            The Mid-Shore Community Band carries on the tradition of community/town bands in the Middle Eastern Shore of Maryland. During the golden age of the town band (1880-1922), many communities were fortunate enough to have their own town bands. Easton had a band, Cambridge had The Merry Concert Band and the Rescue Fire Company Band. Many larger companies had a band, fire departments often had a band, and organizations like the American Legion might also have a band. These bands were a major form of entertainment for the community.
-            <br><br>
-            Mid-Shore Community Band is an all-volunteer, non-profit organization. We are open to adults who play or have played band instruments as well as high school students who are approved by the Music Director. If you would like to join MSCB, click on the "Join" tab above.
-            <br><br>
-            Since our founding in 2009, we have presented concerts in Talbot, Dorchester, and Caroline counties. If you would like to explore the possibility of having Mid-Shore Community Band perform for your organization, please contact us via e-mail at <a href="mailto:info@mscb.org">info@mscb.org</a>.
-            <br><br>
-         </p>
-         <p class="centered-text">
-            <strong>"If you haven't had the pleasure of listening to this group of wonderful musicians, you'll be missing a glorious concert." </strong>
-            <br>
-            The Star Democrat Editorial Page, 6/14/2012
-         </p>
+         <div class="header"></div>
+         <div class="card-content">
+            <p>
+               The Mid-Shore Community Band carries on the tradition of community/town bands in the Middle Eastern Shore of Maryland. During the golden age of the town band (1880-1922), many communities were fortunate enough to have their own town bands. Easton had a band, Cambridge had The Merry Concert Band and the Rescue Fire Company Band. Many larger companies had a band, fire departments often had a band, and organizations like the American Legion might also have a band. These bands were a major form of entertainment for the community.
+               <br><br>
+               Mid-Shore Community Band is an all-volunteer, non-profit organization. We are open to adults who play or have played band instruments as well as high school students who are approved by the Music Director. If you would like to join MSCB, click on the "Join" tab above.
+               <br><br>
+               Since our founding in 2009, we have presented concerts in Talbot, Dorchester, and Caroline counties. If you would like to explore the possibility of having Mid-Shore Community Band perform for your organization, please contact us via e-mail at <a href="mailto:info@mscb.org">info@mscb.org</a>.
+               <br><br>
+            </p>
+            <p class="centered-text">
+               <strong>"If you haven't had the pleasure of listening to this group of wonderful musicians, you'll be missing a glorious concert." </strong>
+               <br>
+               The Star Democrat Editorial Page, 6/14/2012
+            </p>
+         </div>
       </paper-card>
-   </template>
+   </div>
+</template>
 
-   <script>
-      Polymer({
-         is: 'mscb-home'
-      });
-   </script>
-
+<script>
+   Polymer({
+      is: 'mscb-home'
+   });
+</script>
 </dom-module>
