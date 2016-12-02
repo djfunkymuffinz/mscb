@@ -8,12 +8,25 @@
 <link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/animations/slide-right-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/slide-left-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/slide-from-right-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/slide-from-left-animation.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <dom-module id="mscb-app">
 <style>
+   :host::before {
+      background-image: url('../assets/img/background.jpg');
+      content: '';
+      z-index: -1;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      position: absolute;
+   }
    neon-animated-pages {
       height: 100%;
    }
@@ -95,7 +108,7 @@
       <div 
          class$="tabs-container [[loginClass]]"
          on-tap="captureLoginTap">
-         <paper-tabs selected="{{page}}">
+         <paper-tabs id="tabs" selected="{{page}}">
             <paper-tab>Home</paper-tab>
             <paper-tab>Performances</paper-tab>
             <paper-tab>Join</paper-tab>
@@ -122,7 +135,10 @@
          </div>
       </div>
       
-      <neon-animated-pages selected="[[page]]">
+      <neon-animated-pages
+         selected="{{page}}"
+         entry-animation="[[entryAnimation]]"
+         exit-animation="[[exitAnimation]]">
          <mscb-home></mscb-home>
          <mscb-perform></mscb-perform>
          <div></div>
@@ -141,6 +157,12 @@ Polymer({
 
    is: 'mscb-app',
 
+   ready: function() {
+      console.log('#ready');
+      var tabs = this.$.tabs;
+      this.listen(tabs, 'iron-activate', 'updatePageTransition');
+   },
+
    properties: {
       isLoggedIn: {
          type: Boolean,
@@ -148,12 +170,19 @@ Polymer({
       },
       loginClass: {
          type: String,
-         value: '',
       },
       page: {
          type: Number,
          value: 0
       },
+      entryAnimation: {
+         type: String,
+         value: 'slide-from-right-animation'
+      },
+      exitAnimation: {
+         type: String,
+         value: 'slide-left-animation'
+      }
    },
 
    logInAttempt: function() {
@@ -177,6 +206,10 @@ Polymer({
    hideLogin: function(event) {
       this.loginClass = '';
       this.unlisten(this, 'tap', 'hideLogin');
+   },
+   updatePageTransition: function(event, info) {
+      this.entryAnimation = info.selected > this.page ? 'slide-from-right-animation' : 'slide-from-left-animation';
+      this.exitAnimation = info.selected > this.page ? 'slide-left-animation' : 'slide-right-animation';
    }
 });
 </script>
