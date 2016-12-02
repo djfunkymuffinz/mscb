@@ -142,6 +142,22 @@ Polymer({
    is: 'mscb-app',
 
    properties: {
+      animationConfig{
+         value: function() {
+            return {
+               'entry': {
+                  name: 'page-entry-animation',
+                  node: this,
+                  currentPage:
+               },
+               'exit': {
+                  name: 'fade-out-animation',
+                  node: this,
+                  currentPage: this.page
+               }
+            }
+         }
+      },
       isLoggedIn: {
          type: Boolean,
          value: false
