@@ -1,0 +1,88 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+<dom-module id="mscb-perform">
+   <style>
+      .performance-container {
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         align-items: flex-start;
+         align-content: flex-start;
+         width: 90%;
+      }
+
+      .performance-card {
+         margin: 10px;
+         width: 350px;
+         height: 450px;
+      }
+
+      paper-card.card-actions {
+         max-height: 32px;
+      }
+   </style>
+
+   <template>
+      <div class="performance-container">
+         <template is="dom-repeat" items="{{performances}}">
+            <paper-card class="performance-card" heading="{{item.title}}">
+               <div class="card-content">
+                  <paper-item>
+                     <paper-item-body two-line>
+                        <div>{{item.date}}</div>
+                        <div secondary>{{item.location}}</div>
+                     </paper-item-body>
+                  </paper-item>
+               </div>
+               <div class="card-actions">
+                  <iron-icon icon="maps:map"></iron-icon>
+               </div>
+            </paper-card>
+         </template>
+      </div>
+   </template>
+
+   <script>
+      Polymer({
+         is: 'mscb-perform',
+
+         ready: function() {
+            this.performances = [
+               {
+                  id: 'nchs-christmas',
+                  title: 'Christmas Concert',
+                  date: 'Tuesday 7:00pm 11/29/2016',
+                  location: 'North Caroline High School Auditorium'
+               }, {
+                  id: 'st-marks-christmas',
+                  title: 'Christmas Concert',
+                  date: 'Sunday 6:30pm 12/4/2016',
+                  location: 'St. Marks United Methodist Church - Easton MD'
+               }, {
+                  id: 'st-michaels-christmas',
+                  title: 'Christmas In St. Michaels',
+                  date: 'Saturday 10:00am 12/10/2016',
+                  location: 'At the reviewing stand - Railroad Ave, St. Michaels, MD'
+               }, {
+                  id: 'st-patricks-concert',
+                  title: 'Saint Patricks Concert',
+                  date: 'Sunday 4:00pm 3/10/2017',
+                  location: 'Christ Church - Cambridge, MD'
+               }, {
+                  id: 'mcbf-concert',
+                  title: 'Maryland Community Band Festival',
+                  date: 'Saturday 1:00pm 6/10/2017',
+                  location: 'Historic Springfield Barn - Williamsport, MD'
+               }, {
+                  id: 'flag-day-concert',
+                  title: 'Flag Day Concert and Flag Day Ceremony',
+                  date: 'Wednesday 6/14/2017',
+                  location: 'Easton Elks Lodge - Easton, MD'
+               }];
+         }
+      });
+   </script>
+</dom-module>

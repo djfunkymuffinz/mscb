@@ -25,6 +25,10 @@
     "paper-card": "PolymerElements/paper-card#^1.1.4",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.3",
     "paper-button": "PolymerElements/paper-button#^1.0.14",
-    "paper-dialog": "PolymerElements/paper-dialog#^1.1.0"
+    "paper-dialog": "PolymerElements/paper-dialog#^1.1.0",
+    "paper-input": "PolymerElements/paper-input#^1.1.22",
+    "paper-material": "PolymerElements/paper-material#^1.0.6",
+    "paper-item": "PolymerElements/paper-item#^1.2.1",
+    "iron-icons": "PolymerElements/iron-icons#^1.2.0"
   }
 }
