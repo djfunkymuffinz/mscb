@@ -7,6 +7,8 @@
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../bower_components/polymer/polymer.html">
@@ -133,14 +135,18 @@
          <div class="login-form-container">
             <form>
                <paper-card>
-                  <paper-input label="password" type="password"></paper-input>
-                  <paper-button type="submit" raised>Login</paper-button>
+                  <paper-input
+                     label="password"
+                     type="password"></paper-input>
+                  <paper-button
+                     type="submit"
+                     raised>Login</paper-button>
                </paper-card>
             </form>
          </div>
       </div>
       
-      <iron-pages selected="{{page}}">
+      <neon-animated-pages selected="[[page]]">
          <mscb-home class="has-background"></mscb-home>
          <mscb-perform class="has-background"></mscb-perform>
          <div></div>
@@ -150,7 +156,7 @@
          <div></div>
          <div></div>
          <div></div>
-      </iron-pages>
+      </neon-animated-pages>
    </paper-header-panel>
 </template>
 
