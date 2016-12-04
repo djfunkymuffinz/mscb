@@ -4,10 +4,12 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-in-animation.html">
 <link rel="import" href="../bower_components/neon-animation/animations/slide-right-animation.html">
 <link rel="import" href="../bower_components/neon-animation/animations/slide-left-animation.html">
 <link rel="import" href="../bower_components/neon-animation/animations/slide-from-right-animation.html">
@@ -17,6 +19,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <dom-module id="mscb-app">
 <style>
+   :host {
+      display: block;
+   }
    :host::before {
       background-image: url('../assets/img/background.jpg');
       content: '';
@@ -27,11 +32,12 @@
       top: 0;
       position: absolute;
    }
+
    neon-animated-pages {
       height: 100%;
    }
 
-   .tabs-container {
+   nav {
       position: relative;
       transition: height .4s cubic-bezier(.4,0,.2,1);
       height: 48px;
@@ -40,8 +46,11 @@
       color: white;
    }
 
+   nav.show-login {
+      height: 64px;
+   }
+
    paper-tabs {
-      transition: opacity .4s cubic-bezier(.4,0,.2,1);
       width: 100%;
       position: absolute;
       bottom: 0px;
@@ -49,55 +58,48 @@
       color: currentColor;
       --paper-tabs-selection-bar-color: var(--accent-color);
    }
-
-   .tabs-container.login-prompt {
-      height: 96px;
-   }
-
-   .tabs-container.login-prompt paper-tabs {
+   
+   nav.show-login paper-tabs {
       opacity: 0;
       pointer-events: none;
    }
 
-   .tabs-container.login-prompt .login-form-container {
+   .login-form-container {
+      opacity: 0;
+      pointer-events: none;
+      width: 100%;
+      position: absolute;
+      bottom: 0px;
+      padding-bottom: 16px;
+   }
+
+   nav.show-login .login-form-container {
       opacity: 1;
       pointer-events: auto;
    }
 
-   .login-form-container {
-      position: absolute;
-      transition: opacity .4s cubic-bezier(.4,0,.2,1);
-      opacity: 0;
-      width: 100%;
-      bottom: 0px;
-      margin-bottom: 16px;
-      pointer-events: none;
-   }
-
-   .login-form-container form {
-      margin: auto;
-      max-width: 500px;
-   }
-
-   .login-form-container paper-input {
-      margin: auto;
-      width: 80%;
+   .login-form-container paper-material {
+      width: 400px;
       position: relative;
+      margin: auto;
       background-color: white;
+      padding: 8px;
+      text-align: center;
    }
 
-   .login-form-container paper-button {
-      position: relative;
+   form {
+      margin: 0;
+   }
+
+   paper-input {
+      text-align: left;
+   }
+
+   paper-material form  paper-button {
+      display: block;
+      margin: 0;
       background-color: var(--accent-color);
-      margin: auto;
    }
-
-   .login-form-container paper-card {
-      display: flex;
-      flex-direction: column;
-      padding: 5px;
-   }
-
 </style>
 
 <template>
@@ -105,9 +107,23 @@
       <paper-toolbar on-tap="captureLoginTap">
          <span class="title">MSCB</span>
       </paper-toolbar>
-      <div 
-         class$="tabs-container [[loginClass]]"
+      <nav
+         class$="[[loginClass]]"
          on-tap="captureLoginTap">
+         <div
+            id="loginForm"
+            class="login-form-container">
+            <paper-material elevation="2">
+               <form>
+                  <paper-input label="password"></paper-input>
+                  <paper-button
+                     type="submit"
+                     raised>
+                     Login
+                  </paper-button>
+               <form>
+            </paper-material>
+         </div>
          <paper-tabs id="tabs" selected="{{page}}">
             <paper-tab>Home</paper-tab>
             <paper-tab>Performances</paper-tab>
@@ -118,27 +134,12 @@
             <paper-tab on-tap="checkLogin">Database</paper-tab>
             <paper-tab on-tap="checkLogin">Documents</paper-tab>
          </paper-tabs>
-         <div class="login-form-container">
-            <form>
-               <paper-card>
-                  <paper-input
-                     label="password"
-                     type="password">
-                  </paper-input>
-                  <paper-button
-                     type="submit"
-                     raised>
-                     Login
-                  </paper-button>
-               </paper-card>
-            </form>
-         </div>
-      </div>
+      </nav>
       
       <neon-animated-pages
          selected="{{page}}"
-         entry-animation="[[entryAnimation]]"
-         exit-animation="[[exitAnimation]]">
+         entry-animation="[[pageEntryAnimation]]"
+         exit-animation="[[pageExitAnimation]]">
          <mscb-home></mscb-home>
          <mscb-perform></mscb-perform>
          <div></div>
@@ -156,6 +157,7 @@
 Polymer({
 
    is: 'mscb-app',
+   behaviors: [Polymer.NeonAnimationRunnerBehavior],
 
    ready: function() {
       console.log('#ready');
@@ -170,19 +172,40 @@ Polymer({
       },
       loginClass: {
          type: String,
+         value: ''
       },
       page: {
          type: Number,
          value: 0
       },
-      entryAnimation: {
+      pageEntryAnimation: {
          type: String,
          value: 'slide-from-right-animation'
       },
-      exitAnimation: {
+      pageExitAnimation: {
          type: String,
          value: 'slide-left-animation'
-      }
+      },
+      animationConfig: {
+         value: function() {
+            return {
+               'show-login': [{
+                  name: 'fade-out-animation',
+                  node: this.$.tabs
+               }, {
+                  name: 'fade-in-animation',
+                  node: this.$.loginForm
+               }],
+               'hide-login': [{
+                  name: 'fade-in-animation',
+                  node: this.$.tabs
+               }, {
+                  name: 'fade-out-animation',
+                  node: this.$.loginForm
+               }]
+            }
+         }
+      },
    },
 
    logInAttempt: function() {
@@ -194,7 +217,8 @@ Polymer({
    checkLogin: function(event) {
       if(this.isLoggedIn) return;
       event.stopPropagation();
-      this.loginClass = 'login-prompt';
+      this.loginClass = 'show-login';
+      this.playAnimation('show-login');
       this.listen(this, 'tap', 'hideLogin');
       console.log(event);
    },
@@ -205,11 +229,12 @@ Polymer({
 
    hideLogin: function(event) {
       this.loginClass = '';
+      this.playAnimation('hide-login');
       this.unlisten(this, 'tap', 'hideLogin');
    },
    updatePageTransition: function(event, info) {
-      this.entryAnimation = info.selected > this.page ? 'slide-from-right-animation' : 'slide-from-left-animation';
-      this.exitAnimation = info.selected > this.page ? 'slide-left-animation' : 'slide-right-animation';
+      this.pageEntryAnimation = info.selected > this.page ? 'slide-from-right-animation' : 'slide-from-left-animation';
+      this.pageExitAnimation = info.selected > this.page ? 'slide-left-animation' : 'slide-right-animation';
    }
 });
 </script>
