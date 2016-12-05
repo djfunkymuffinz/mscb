@@ -1,28 +1,15 @@
-<link rel="import" href="mscb-home.html">
-<link rel="import" href="mscb-perform.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
-<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/fade-in-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/slide-right-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/slide-left-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/slide-from-right-animation.html">
-<link rel="import" href="../bower_components/neon-animation/animations/slide-from-left-animation.html">
-<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="elements.html">
 <dom-module id="mscb-app">
 <style>
-   :host {
-      display: block;
+   neon-animated-pages {
+      height: 100%;
    }
-   :host::before {
+
+   app-drawer-layout {
+      overflow-y: auto;
+   }
+
+   app-drawer-layout::before {
       background-image: url('../assets/img/background.jpg');
       content: '';
       z-index: -1;
@@ -33,12 +20,8 @@
       position: absolute;
    }
 
-   neon-animated-pages {
-      height: 100%;
-   }
-
    nav {
-      position: relative;
+      width:100%;
       transition: height .4s cubic-bezier(.4,0,.2,1);
       height: 48px;
       font-family: 'Roboto';
@@ -47,14 +30,14 @@
    }
 
    nav.show-login {
-      height: 64px;
+      height: 150px;
    }
 
    paper-tabs {
-      width: 100%;
       position: absolute;
-      bottom: 0px;
-      background-color: transparent;
+      bottom: 0;
+      width: 100%;
+      background-color: var(--primary-color);
       color: currentColor;
       --paper-tabs-selection-bar-color: var(--accent-color);
    }
@@ -65,6 +48,7 @@
    }
 
    .login-form-container {
+      display: none;
       opacity: 0;
       pointer-events: none;
       width: 100%;
@@ -74,6 +58,7 @@
    }
 
    nav.show-login .login-form-container {
+      display: block;
       opacity: 1;
       pointer-events: auto;
    }
@@ -100,57 +85,95 @@
       margin: 0;
       background-color: var(--accent-color);
    }
+
+   app-toolbar {
+      font-family: 'Roboto';
+      height:48px;
+      color: white;
+      background-color: var(--primary-color);
+   }
+
 </style>
 
 <template>
-   <paper-header-panel mode="scroll">
-      <paper-toolbar on-tap="captureLoginTap">
-         <span class="title">MSCB</span>
-      </paper-toolbar>
-      <nav
-         class$="[[loginClass]]"
-         on-tap="captureLoginTap">
-         <div
-            id="loginForm"
-            class="login-form-container">
-            <paper-material elevation="2">
-               <form>
-                  <paper-input label="password"></paper-input>
-                  <paper-button
-                     type="submit"
-                     raised>
-                     Login
-                  </paper-button>
-               <form>
-            </paper-material>
-         </div>
-         <paper-tabs id="tabs" selected="{{page}}">
-            <paper-tab>Home</paper-tab>
-            <paper-tab>Performances</paper-tab>
-            <paper-tab>Join</paper-tab>
-            <paper-tab>Donate</paper-tab>
-            <paper-tab>Photos</paper-tab>
-            <paper-tab on-tap="checkLogin">Listening</paper-tab>
-            <paper-tab on-tap="checkLogin">Database</paper-tab>
-            <paper-tab on-tap="checkLogin">Documents</paper-tab>
-         </paper-tabs>
-      </nav>
-      
-      <neon-animated-pages
-         selected="{{page}}"
-         entry-animation="[[pageEntryAnimation]]"
-         exit-animation="[[pageExitAnimation]]">
-         <mscb-home></mscb-home>
-         <mscb-perform></mscb-perform>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-      </neon-animated-pages>
-   </paper-header-panel>
+   <app-drawer-layout id="scrollingRegion" force-narrow>
+      <app-drawer id="drawer">
+         <app-toolbar>Navigation</app-toolbar>
+         <paper-menu
+            id="menu"
+            selected="{{page}}">
+            <paper-item>Home</paper-item>
+            <paper-item>Performances</paper-item>
+            <paper-item>Join</paper-item>
+            <paper-item>Donate</paper-item>
+            <paper-item>Photos</paper-item>
+            <paper-item on-tap="checkLogin">Listening</paper-item>
+            <paper-item on-tap="checkLogin">Database</paper-item>
+            <paper-item on-tap="checkLogin">Documents</paper-item>
+         </paper-menu>
+      </app-drawer>
+      <app-header-layout has-scrolling-region >
+         <app-header
+            id="header"
+            scroll-target="scrollingRegion"
+            fixed
+            condenses>
+            <app-toolbar
+               on-tap="captureLoginTap">
+               <paper-icon-button icon="menu" on-tap="openDrawer" hidden$="{{wideLayout}}"></paper-icon-button>
+               <div main-title>MSCB</div>
+            </app-toolbar>
+            <nav
+               hidden$="{{!wideLayout}}"
+               class$="[[loginClass]]"
+               on-tap="captureLoginTap">
+               <div
+                  sticky
+                  id="loginForm"
+                  class="login-form-container">
+                  <paper-material elevation="2">
+                     <form>
+                        <paper-input label="password"></paper-input>
+                        <paper-button
+                           type="submit"
+                           raised>
+                           Login
+                        </paper-button>
+                     <form>
+                  </paper-material>
+               </div>
+               <paper-tabs
+                  id="tabs"
+                  selected="{{page}}">
+                  <paper-tab>Home</paper-tab>
+                  <paper-tab>Performances</paper-tab>
+                  <paper-tab>Join</paper-tab>
+                  <paper-tab>Donate</paper-tab>
+                  <paper-tab>Photos</paper-tab>
+                  <paper-tab on-tap="checkLogin">Listening</paper-tab>
+                  <paper-tab on-tap="checkLogin">Database</paper-tab>
+                  <paper-tab on-tap="checkLogin">Documents</paper-tab>
+               </paper-tabs>
+            </nav>
+         </app-header>
+
+         <neon-animated-pages
+            selected="{{page}}"
+            entry-animation="[[pageEntryAnimation]]"
+            exit-animation="[[pageExitAnimation]]">
+            <mscb-home></mscb-home>
+            <mscb-perform></mscb-perform>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+         </neon-animated-pages>
+      </app-header-layout>
+   </app-drawer-layout>
+   <iron-media-query query="min-width: 600px" query-matches="{{wideLayout}}">
 </template>
 
 <script>
@@ -162,10 +185,16 @@ Polymer({
    ready: function() {
       console.log('#ready');
       var tabs = this.$.tabs;
+      var menu = this.$.menu;
       this.listen(tabs, 'iron-activate', 'updatePageTransition');
+      this.listen(menu, 'iron-activate', 'updatePageTransition');
    },
 
    properties: {
+      wideLayout: {
+         type: Boolean,
+         value: false
+      },
       isLoggedIn: {
          type: Boolean,
          value: false
@@ -233,8 +262,17 @@ Polymer({
       this.unlisten(this, 'tap', 'hideLogin');
    },
    updatePageTransition: function(event, info) {
-      this.pageEntryAnimation = info.selected > this.page ? 'slide-from-right-animation' : 'slide-from-left-animation';
-      this.pageExitAnimation = info.selected > this.page ? 'slide-left-animation' : 'slide-right-animation';
+      if (!this.wideLayout) {
+         this.$.drawer.close();
+         this.pageEntryAnimation = 'slide-from-right-animation';
+         this.pageExitAnimation = 'scale-down-fade-out-animation';
+      } else {
+         this.pageEntryAnimation = info.selected > this.page ? 'slide-from-right-animation' : 'slide-from-left-animation';
+         this.pageExitAnimation = info.selected > this.page ? 'slide-left-animation' : 'slide-right-animation';
+      }
+   },
+   openDrawer: function(event) {
+      this.$.drawer.open();
    }
 });
 </script>

@@ -30,6 +30,7 @@
     "paper-material": "PolymerElements/paper-material#^1.0.6",
     "paper-item": "PolymerElements/paper-item#^1.2.1",
     "iron-icons": "PolymerElements/iron-icons#^1.2.0",
-    "neon-animation": "PolymerElements/neon-animation#^1.2.4"
+    "neon-animation": "PolymerElements/neon-animation#^1.2.4",
+    "app-layout": "PolymerElements/app-layout#^0.10.6"
   }
 }
