@@ -264,8 +264,8 @@ Polymer({
    updatePageTransition: function(event, info) {
       if (!this.wideLayout) {
          this.$.drawer.close();
-         this.pageEntryAnimation = 'slide-from-right-animation';
-         this.pageExitAnimation = 'scale-down-fade-out-animation';
+         this.pageEntryAnimation = 'fade-in-animation';
+         this.pageExitAnimation = 'fade-out-animation';
       } else {
          this.pageEntryAnimation = info.selected > this.page ? 'slide-from-right-animation' : 'slide-from-left-animation';
          this.pageExitAnimation = info.selected > this.page ? 'slide-left-animation' : 'slide-right-animation';
