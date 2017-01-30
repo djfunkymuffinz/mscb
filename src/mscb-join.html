@@ -1,0 +1,83 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<dom-module id="mscb-join">
+<style>
+   paper-material {
+      padding: 8px;
+      max-width: 50%;
+      height: 400px;
+      margin: auto;
+      margin-top: 8px;
+      background-color: white;
+   }
+
+   paper-input {
+      padding: 8px;
+      margin-top: 0;
+      margin: auto;
+   }
+
+   paper-textarea {
+      display: block;
+      width: 200px;
+   }
+
+   h4 {
+      font-family: Roboto;
+   }
+
+   ul {
+      list-style: none;
+   }
+
+   li {
+      float: left;
+      width: 50%;
+   }
+</style>
+
+<template>
+<paper-material elevation="1">
+   <form
+      is="iron-form"
+      id="form"
+      method="post"
+      action="/">
+      <paper-input
+         name="name"
+         label="Name"
+         required>
+      </paper-input>
+      <h4>What do you play? (Needed Instruments In Red)</h4>
+      <ul>
+         <li><paper-checkbox>Clarinet</paper-checkbox></li>
+         <li><paper-checkbox>Bass Clarinet</paper-checkbox></li>
+         <li><paper-checkbox>Horn</paper-checkbox></li>
+         <li><paper-checkbox>Bassoon</paper-checkbox></li>
+         <li><paper-checkbox>Precussion</paper-checkbox></li>
+         <li><paper-checkbox>Alto Sax</paper-checkbox></li>
+         <li><paper-checkbox>Tenor Sax</paper-checkbox></li>
+         <li><paper-checkbox>Bari Sax</paper-checkbox></li>
+         <li><paper-checkbox>Trumpet</paper-checkbox></li>
+         <li><paper-checkbox>Trombone</paper-checkbox></li>
+         <li><paper-checkbox>Tuba</paper-checkbox></li>
+         <li><paper-checkbox>Flute</paper-checkbox></li>
+         <li><paper-checkbox>Oboe</paper-checkbox></li>
+         <li><paper-checkbox>Piccolo</paper-checkbox></li>
+      </ul><br><br><br><br><br><br><br>
+      <paper-textarea name="background" label="Musical Background"></paper-textarea>
+   </form>
+</paper-material>
+</template>
+
+<script>
+   Polymer({
+      is: 'mscb-join'
+   });
+</script>
+</dom-module>
